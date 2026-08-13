@@ -12,11 +12,13 @@ import {
   Languages,
   Plus,
   NotebookTabs,
+  ShieldCheck,
 } from "lucide-react";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { LinkButton } from "./LinkButton";
 import { resetAuthorizedCache } from "@/utils/IdbUtils";
 import { useCurrentAgent } from "@/queries/useAgents";
+import { useIsPlatformAdmin } from "@/queries/useAdmin";
 import { Dropdown } from "antd";
 import { useOrganizations } from "@/queries/useOrganizations";
 
@@ -24,6 +26,7 @@ export default function Menu() {
   const user = useBoundStore((state) => state.ui.user);
 
   const { data: agent } = useCurrentAgent();
+  const { data: isAdmin } = useIsPlatformAdmin();
 
   const setActiveOrg = useBoundStore((state) => state.ui.setActiveOrg);
   const activeOrgId = useBoundStore((state) => state.ui.activeOrgId);
@@ -98,6 +101,18 @@ export default function Menu() {
         >
           <BarChart3 className="w-[24px] h-[24px] stroke-[2]" />
         </LinkButton>
+
+        {/* Admin button (platform admins only) */}
+        {isAdmin && (
+          <LinkButton
+            to="/admin"
+            title={t("Admin")}
+            isActive={pathname.startsWith("/admin")}
+            className="mt-[10px]"
+          >
+            <ShieldCheck className="w-[24px] h-[24px] stroke-[2]" />
+          </LinkButton>
+        )}
       </div>
 
       {/* Lower section */}

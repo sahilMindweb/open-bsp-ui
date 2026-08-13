@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./global.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { TickProvider } from "./contexts/useTick";
+import { TickProvider } from "./contexts/TickProvider";
 import { WhatsAppIntegrationProvider } from "./contexts/WhatsAppIntegrationContext";
 import { loadTranslations } from "./i18n/translations";
 import { detectDefaultLanguage, type Language } from "./stores/uiSlice";

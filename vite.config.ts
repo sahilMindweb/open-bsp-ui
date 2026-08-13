@@ -12,11 +12,7 @@ export default defineConfig({
       target: "react",
       autoCodeSplitting: true,
     }),
-    react({
-      babel: {
-        plugins: [["babel-plugin-react-compiler"]],
-      },
-    }),
+    react(),
     tailwindcss(),
   ],
   build: {
@@ -26,5 +22,10 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  server: {
+    // Allow access via ngrok (or any *.ngrok-free.dev tunnel) for testing.
+    host: true,
+    allowedHosts: [".ngrok-free.dev"],
   },
 });

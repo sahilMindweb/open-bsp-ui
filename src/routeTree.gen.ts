@@ -16,6 +16,7 @@ import { Route as OauthInstagramRouteImport } from './routes/oauth/instagram'
 import { Route as OauthConsentRouteImport } from './routes/oauth/consent'
 import { Route as OauthCallbackRouteImport } from './routes/oauth/callback'
 import { Route as AuthStatsRouteImport } from './routes/_auth/stats'
+import { Route as AuthAdminRouteImport } from './routes/_auth/admin'
 import { Route as AuthStatsIndexRouteImport } from './routes/_auth/stats/index'
 import { Route as AuthSettingsIndexRouteImport } from './routes/_auth/settings/index'
 import { Route as AuthIntegrationsIndexRouteImport } from './routes/_auth/integrations/index'
@@ -27,6 +28,8 @@ import { Route as OnboardInstagramCallbackRouteImport } from './routes/onboard.i
 import { Route as OnboardInstagramTokenRouteImport } from './routes/onboard.instagram.$token'
 import { Route as AuthStatsUsageRouteImport } from './routes/_auth/stats/usage'
 import { Route as AuthStatsQuotasRouteImport } from './routes/_auth/stats/quotas'
+import { Route as AuthSettingsPartnerRouteImport } from './routes/_auth/settings/partner'
+import { Route as AuthSettingsClientsRouteImport } from './routes/_auth/settings/clients'
 import { Route as AuthIntegrationsMediaPreprocessingRouteImport } from './routes/_auth/integrations/media-preprocessing'
 import { Route as AuthConversationsNewRouteImport } from './routes/_auth/conversations/new'
 import { Route as AuthContactsNewRouteImport } from './routes/_auth/contacts/new'
@@ -97,6 +100,11 @@ const AuthStatsRoute = AuthStatsRouteImport.update({
   path: '/stats',
   getParentRoute: () => AuthRoute,
 } as any)
+const AuthAdminRoute = AuthAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthRoute,
+} as any)
 const AuthStatsIndexRoute = AuthStatsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -152,6 +160,16 @@ const AuthStatsQuotasRoute = AuthStatsQuotasRouteImport.update({
   id: '/quotas',
   path: '/quotas',
   getParentRoute: () => AuthStatsRoute,
+} as any)
+const AuthSettingsPartnerRoute = AuthSettingsPartnerRouteImport.update({
+  id: '/settings/partner',
+  path: '/settings/partner',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthSettingsClientsRoute = AuthSettingsClientsRouteImport.update({
+  id: '/settings/clients',
+  path: '/settings/clients',
+  getParentRoute: () => AuthRoute,
 } as any)
 const AuthIntegrationsMediaPreprocessingRoute =
   AuthIntegrationsMediaPreprocessingRouteImport.update({
@@ -358,6 +376,7 @@ const AuthIntegrationsWhatsappOrgAddressIdTemplatesTemplateIdRoute =
 
 export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
+  '/admin': typeof AuthAdminRoute
   '/stats': typeof AuthStatsRouteWithChildren
   '/oauth/callback': typeof OauthCallbackRoute
   '/oauth/consent': typeof OauthConsentRoute
@@ -369,6 +388,8 @@ export interface FileRoutesByFullPath {
   '/contacts/new': typeof AuthContactsNewRoute
   '/conversations/new': typeof AuthConversationsNewRoute
   '/integrations/media-preprocessing': typeof AuthIntegrationsMediaPreprocessingRoute
+  '/settings/clients': typeof AuthSettingsClientsRoute
+  '/settings/partner': typeof AuthSettingsPartnerRoute
   '/stats/quotas': typeof AuthStatsQuotasRoute
   '/stats/usage': typeof AuthStatsUsageRoute
   '/onboard/instagram/$token': typeof OnboardInstagramTokenRoute
@@ -412,6 +433,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
+  '/admin': typeof AuthAdminRoute
   '/oauth/callback': typeof OauthCallbackRoute
   '/oauth/consent': typeof OauthConsentRoute
   '/oauth/instagram': typeof OauthInstagramRoute
@@ -422,6 +444,8 @@ export interface FileRoutesByTo {
   '/contacts/new': typeof AuthContactsNewRoute
   '/conversations/new': typeof AuthConversationsNewRoute
   '/integrations/media-preprocessing': typeof AuthIntegrationsMediaPreprocessingRoute
+  '/settings/clients': typeof AuthSettingsClientsRoute
+  '/settings/partner': typeof AuthSettingsPartnerRoute
   '/stats/quotas': typeof AuthStatsQuotasRoute
   '/stats/usage': typeof AuthStatsUsageRoute
   '/onboard/instagram/$token': typeof OnboardInstagramTokenRoute
@@ -467,6 +491,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_auth': typeof AuthRouteWithChildren
   '/login': typeof LoginRoute
+  '/_auth/admin': typeof AuthAdminRoute
   '/_auth/stats': typeof AuthStatsRouteWithChildren
   '/oauth/callback': typeof OauthCallbackRoute
   '/oauth/consent': typeof OauthConsentRoute
@@ -478,6 +503,8 @@ export interface FileRoutesById {
   '/_auth/contacts/new': typeof AuthContactsNewRoute
   '/_auth/conversations/new': typeof AuthConversationsNewRoute
   '/_auth/integrations/media-preprocessing': typeof AuthIntegrationsMediaPreprocessingRoute
+  '/_auth/settings/clients': typeof AuthSettingsClientsRoute
+  '/_auth/settings/partner': typeof AuthSettingsPartnerRoute
   '/_auth/stats/quotas': typeof AuthStatsQuotasRoute
   '/_auth/stats/usage': typeof AuthStatsUsageRoute
   '/onboard/instagram/$token': typeof OnboardInstagramTokenRoute
@@ -523,6 +550,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/login'
+    | '/admin'
     | '/stats'
     | '/oauth/callback'
     | '/oauth/consent'
@@ -534,6 +562,8 @@ export interface FileRouteTypes {
     | '/contacts/new'
     | '/conversations/new'
     | '/integrations/media-preprocessing'
+    | '/settings/clients'
+    | '/settings/partner'
     | '/stats/quotas'
     | '/stats/usage'
     | '/onboard/instagram/$token'
@@ -577,6 +607,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
+    | '/admin'
     | '/oauth/callback'
     | '/oauth/consent'
     | '/oauth/instagram'
@@ -587,6 +618,8 @@ export interface FileRouteTypes {
     | '/contacts/new'
     | '/conversations/new'
     | '/integrations/media-preprocessing'
+    | '/settings/clients'
+    | '/settings/partner'
     | '/stats/quotas'
     | '/stats/usage'
     | '/onboard/instagram/$token'
@@ -631,6 +664,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_auth'
     | '/login'
+    | '/_auth/admin'
     | '/_auth/stats'
     | '/oauth/callback'
     | '/oauth/consent'
@@ -642,6 +676,8 @@ export interface FileRouteTypes {
     | '/_auth/contacts/new'
     | '/_auth/conversations/new'
     | '/_auth/integrations/media-preprocessing'
+    | '/_auth/settings/clients'
+    | '/_auth/settings/partner'
     | '/_auth/stats/quotas'
     | '/_auth/stats/usage'
     | '/onboard/instagram/$token'
@@ -746,6 +782,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthStatsRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_auth/admin': {
+      id: '/_auth/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthAdminRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/_auth/stats/': {
       id: '/_auth/stats/'
       path: '/'
@@ -822,6 +865,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/stats/quotas'
       preLoaderRoute: typeof AuthStatsQuotasRouteImport
       parentRoute: typeof AuthStatsRoute
+    }
+    '/_auth/settings/partner': {
+      id: '/_auth/settings/partner'
+      path: '/settings/partner'
+      fullPath: '/settings/partner'
+      preLoaderRoute: typeof AuthSettingsPartnerRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_auth/settings/clients': {
+      id: '/_auth/settings/clients'
+      path: '/settings/clients'
+      fullPath: '/settings/clients'
+      preLoaderRoute: typeof AuthSettingsClientsRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/_auth/integrations/media-preprocessing': {
       id: '/_auth/integrations/media-preprocessing'
@@ -1088,6 +1145,7 @@ const AuthStatsRouteWithChildren = AuthStatsRoute._addFileChildren(
 )
 
 interface AuthRouteChildren {
+  AuthAdminRoute: typeof AuthAdminRoute
   AuthStatsRoute: typeof AuthStatsRouteWithChildren
   AuthIndexRoute: typeof AuthIndexRoute
   AuthAgentsAgentIdRoute: typeof AuthAgentsAgentIdRoute
@@ -1096,6 +1154,8 @@ interface AuthRouteChildren {
   AuthContactsNewRoute: typeof AuthContactsNewRoute
   AuthConversationsNewRoute: typeof AuthConversationsNewRoute
   AuthIntegrationsMediaPreprocessingRoute: typeof AuthIntegrationsMediaPreprocessingRoute
+  AuthSettingsClientsRoute: typeof AuthSettingsClientsRoute
+  AuthSettingsPartnerRoute: typeof AuthSettingsPartnerRoute
   AuthAgentsIndexRoute: typeof AuthAgentsIndexRoute
   AuthContactsIndexRoute: typeof AuthContactsIndexRoute
   AuthConversationsIndexRoute: typeof AuthConversationsIndexRoute
@@ -1133,6 +1193,7 @@ interface AuthRouteChildren {
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
+  AuthAdminRoute: AuthAdminRoute,
   AuthStatsRoute: AuthStatsRouteWithChildren,
   AuthIndexRoute: AuthIndexRoute,
   AuthAgentsAgentIdRoute: AuthAgentsAgentIdRoute,
@@ -1142,6 +1203,8 @@ const AuthRouteChildren: AuthRouteChildren = {
   AuthConversationsNewRoute: AuthConversationsNewRoute,
   AuthIntegrationsMediaPreprocessingRoute:
     AuthIntegrationsMediaPreprocessingRoute,
+  AuthSettingsClientsRoute: AuthSettingsClientsRoute,
+  AuthSettingsPartnerRoute: AuthSettingsPartnerRoute,
   AuthAgentsIndexRoute: AuthAgentsIndexRoute,
   AuthContactsIndexRoute: AuthContactsIndexRoute,
   AuthConversationsIndexRoute: AuthConversationsIndexRoute,

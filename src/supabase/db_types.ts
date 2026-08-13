@@ -988,12 +988,80 @@ export type Database = {
           },
         ]
       }
+      partner_requests: {
+        Row: {
+          app_id: string
+          created_at: string
+          id: string
+          organization_id: string
+          solution_id: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          app_id: string
+          created_at?: string
+          id?: string
+          organization_id: string
+          solution_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          app_id?: string
+          created_at?: string
+          id?: string
+          organization_id?: string
+          solution_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_requests_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_solutions: {
+        Row: {
+          created_at: string
+          id: string
+          partner_organization_id: string
+          solution_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          partner_organization_id: string
+          solution_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          partner_organization_id?: string
+          solution_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_solutions_partner_organization_id_fkey"
+            columns: ["partner_organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       organizations: {
         Row: {
           created_at: string
           extra: Json | null
           id: string
           name: string
+          partner_id: string | null
           updated_at: string
         }
         Insert: {
@@ -1001,6 +1069,7 @@ export type Database = {
           extra?: Json | null
           id?: string
           name: string
+          partner_id?: string | null
           updated_at?: string
         }
         Update: {
@@ -1008,6 +1077,7 @@ export type Database = {
           extra?: Json | null
           id?: string
           name?: string
+          partner_id?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -1154,6 +1224,33 @@ export type Database = {
       get_authorized_orgs: {
         Args: { role?: Database["public"]["Enums"]["role"] }
         Returns: string[]
+      }
+      get_partner_clients: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          created_at: string
+          id: string
+          name: string
+          phone_number_id: string | null
+          status: string | null
+          waba_id: string | null
+        }[]
+      }
+      admin_whatsapp_overview: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          created_at: string
+          organization_id: string
+          organization_name: string
+          partner_name: string | null
+          phone_number_id: string | null
+          status: string | null
+          waba_id: string | null
+        }[]
+      }
+      is_platform_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
       }
       init_data: {
         Args: {
