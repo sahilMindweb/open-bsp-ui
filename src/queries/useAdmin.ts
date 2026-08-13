@@ -53,9 +53,17 @@ export function useResolvePartnerRequest() {
       status: "approved" | "rejected";
       solution_id?: string;
     }) => {
+      const trimmedSolutionId = solution_id?.trim();
+      if (status === "approved" && !trimmedSolutionId) {
+        throw new Error("Solution ID is required to approve a partner request");
+      }
+
       await supabase
         .from("partner_requests")
-        .update({ status, solution_id: solution_id ?? null })
+        .update({
+          status,
+          solution_id: status === "approved" ? trimmedSolutionId : null,
+        })
         .eq("id", id)
         .throwOnError();
     },
