@@ -79,7 +79,7 @@ function AdminIndex() {
               />
               <button
                 className="px-[12px] py-[8px] rounded-lg bg-primary text-primary-foreground disabled:opacity-50"
-                disabled={resolve.isPending}
+                disabled={resolve.isPending || !solutionIdInput[req.id]?.trim()}
                 onClick={() =>
                   resolve.mutate({
                     id: req.id,
