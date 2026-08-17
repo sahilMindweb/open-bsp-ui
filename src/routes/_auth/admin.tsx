@@ -36,6 +36,7 @@ function AdminIndex() {
   }
 
   const pending = requests?.filter((r) => r.status === "pending") ?? [];
+  const approved = requests?.filter((r) => r.status === "approved") ?? [];
 
   return (
     <>
@@ -57,12 +58,17 @@ function AdminIndex() {
             key={req.id}
             className="flex flex-col gap-[8px] rounded-xl border border-border p-[12px]"
           >
-            <div className="flex justify-between items-center">
-              <span className="text-foreground font-medium">
-                {t("App ID")}: {req.app_id}
+            <div className="flex justify-between items-center pb-[4px]">
+              <span className="text-foreground font-medium uppercase tracking-wider">
+                {req.organizations?.name || "Unknown"}
               </span>
               <span className="text-muted-foreground text-[12px]">
                 {req.created_at}
+              </span>
+            </div>
+            <div className="flex justify-between items-center pb-[8px]">
+              <span className="text-foreground text-[14px]">
+                {t("App ID")}: {req.app_id}
               </span>
             </div>
             <div className="flex gap-[8px]">
@@ -101,6 +107,39 @@ function AdminIndex() {
               </button>
             </div>
           </div>
+        ))}
+      </SectionBody>
+
+      <SectionBody className="gap-4">
+        <div className="text-[16px] font-semibold text-foreground">
+          {t("Partners aprobados")}
+        </div>
+
+        {approved.length === 0 && (
+          <div className="text-muted-foreground">
+            {t("No hay partners aprobados.")}
+          </div>
+        )}
+
+        {approved.map((req) => (
+          <SectionItem
+            key={req.id}
+            title={req.organizations?.name || "Unknown"}
+            description={
+              t("App ID") +
+              ": " +
+              req.app_id +
+              " · " +
+              t("Solution ID") +
+              ": " +
+              (req.solution_id ?? "—")
+            }
+            aside={
+              <div className="p-[8px]">
+                <ShieldCheck className="w-[24px] h-[24px] text-muted-foreground" />
+              </div>
+            }
+          />
         ))}
       </SectionBody>
 

@@ -24,6 +24,10 @@ export function useIsPlatformAdmin() {
   });
 }
 
+export type AdminPartnerRequest = PartnerRequest & {
+  organizations: { name: string } | null;
+};
+
 // Admin: all partner requests across orgs (pending + issued)
 export function useAdminPartnerRequests() {
   return useQuery({
@@ -31,10 +35,10 @@ export function useAdminPartnerRequests() {
     queryFn: async () => {
       const { data } = await supabase
         .from("partner_requests")
-        .select()
+        .select("*, organizations(name)")
         .order("created_at", { ascending: false })
         .throwOnError();
-      return (data ?? []) as PartnerRequest[];
+      return (data ?? []) as AdminPartnerRequest[];
     },
   });
 }
