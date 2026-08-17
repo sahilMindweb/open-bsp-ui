@@ -12,6 +12,28 @@ export type PartnerRequest = {
   updated_at: string;
 };
 
+// Check whether a given App ID already has an approved partner request
+// (across all orgs) — used to warn before submitting a duplicate.
+export function useAppIdAlreadyApproved(appId: string) {
+  const trimmed = appId.trim();
+
+  return useQuery({
+    queryKey: ["app-id-approved", trimmed],
+    queryFn: async () => {
+      if (!trimmed) return false;
+      const { data } = await supabase
+        .from("partner_requests")
+        .select("id")
+        .eq("app_id", trimmed)
+        .eq("status", "approved")
+        .maybeSingle()
+        .throwOnError();
+      return !!data;
+    },
+    enabled: trimmed.length > 0,
+  });
+}
+
 // Partner-facing: the requests submitted by the active org
 export function usePartnerRequests() {
   const orgId = useBoundStore((state) => state.ui.activeOrgId);
