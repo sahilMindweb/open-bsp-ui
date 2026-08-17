@@ -4,6 +4,7 @@ import SectionItem from "@/components/SectionItem";
 import { useTranslation } from "@/hooks/useTranslation";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Building2, Users, Webhook, Key, Layers, Handshake } from "lucide-react";
+import { useIsPlatformAdmin } from "@/queries/useAdmin";
 
 export const Route = createFileRoute("/_auth/settings/")({
   component: SettingsIndex,
@@ -12,6 +13,7 @@ export const Route = createFileRoute("/_auth/settings/")({
 function SettingsIndex() {
   const { translate: t } = useTranslation();
   const navigate = useNavigate();
+  const { data: isAdmin } = useIsPlatformAdmin();
 
   return (
     <>
@@ -89,20 +91,22 @@ function SettingsIndex() {
               })
             }
           />
-          <SectionItem
-            title={t("Convertirse en partner")}
-            aside={
-              <div className="p-[8px]">
-                <Handshake className="w-[24px] h-[24px] text-muted-foreground" />
-              </div>
-            }
-            onClick={() =>
-              navigate({
-                to: "/settings/partner",
-                hash: (prevHash) => prevHash!,
-              })
-            }
-          />
+          {!isAdmin && (
+            <SectionItem
+              title={t("Convertirse en partner")}
+              aside={
+                <div className="p-[8px]">
+                  <Handshake className="w-[24px] h-[24px] text-muted-foreground" />
+                </div>
+              }
+              onClick={() =>
+                navigate({
+                  to: "/settings/partner",
+                  hash: (prevHash) => prevHash!,
+                })
+              }
+            />
+          )}
         </div>
       </SectionBody>
     </>
