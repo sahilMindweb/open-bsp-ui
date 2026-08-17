@@ -12,7 +12,11 @@ export default function Header() {
     <div className="header flex justify-between w-full">
       <div className="flex items-center truncate">
         <div className="text-primary tracking-tighter font-bold text-[24px]">
-          {org?.name || "OpenBSP"}
+          {org?.name || (
+            <span>
+              FLUX <span className="text-[14px] font-medium">by mwt</span>
+            </span>
+          )}
         </div>
       </div>
       <div className="flex justify-end">

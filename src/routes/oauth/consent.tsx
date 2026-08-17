@@ -91,7 +91,7 @@ function OAuthConsent() {
   return (
     <div className="flex flex-col gap-9 justify-center items-center bg-background text-foreground h-dvh w-screen">
       <div className="text-primary tracking-tighter font-bold text-[36px]">
-        OpenBSP
+        FLUX <span className="text-[20px] font-medium">by mwt</span>
       </div>
 
       <div className="flex flex-col gap-4 w-[340px] max-w-[90vw]">

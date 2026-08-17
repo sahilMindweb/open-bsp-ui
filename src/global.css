@@ -219,17 +219,18 @@ button:disabled {
     height: 100%;
     background-image: url("/bg-chat-tile-dark.png");
     background-repeat: repeat;
-    opacity: 0.06; /* Subtle pattern for light mode */
-    filter: invert(
-      1
-    ); /* Invert to make dark pattern on light background if original is light-on-dark */
+    opacity: 0.06;
+    /* Subtle pattern for light mode */
+    filter: invert(1);
+    /* Invert to make dark pattern on light background if original is light-on-dark */
     z-index: -1;
     pointer-events: none;
   }
 
   .dark .bg-chat::before {
     opacity: 0.12;
-    filter: none; /* Keep original for dark mode */
+    filter: none;
+    /* Keep original for dark mode */
   }
 
   /* WhatsApp Web-like Grid Layout */
@@ -271,6 +272,7 @@ button:disabled {
     -ms-overflow-style: none !important;
     scrollbar-width: none !important;
   }
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none !important;
   }
@@ -361,22 +363,23 @@ input[type="range"]::-moz-range-track {
 }
 
 /* Text messages */
-.markdown p + p,
-.markdown p + ul,
-.markdown p + ol,
-.markdown ul + p,
-.markdown ul + ul,
-.markdown ul + ol,
-.markdown ol + p,
-.markdown ol + ul,
-.markdown ol + ol {
+.markdown p+p,
+.markdown p+ul,
+.markdown p+ol,
+.markdown ul+p,
+.markdown ul+ul,
+.markdown ul+ol,
+.markdown ol+p,
+.markdown ol+ul,
+.markdown ol+ol {
   margin-top: 1rem;
 }
 
 .markdown li,
 .markdown li ul,
 .markdown li ol {
-  margin-left: 1.4rem; /* Adjust margin for nested lists */
+  margin-left: 1.4rem;
+  /* Adjust margin for nested lists */
 }
 
 .markdown ol li {
@@ -395,6 +398,7 @@ input[type="range"]::-moz-range-track {
 }
 
 .template-form {
+
   input,
   select,
   textarea,
@@ -402,12 +406,14 @@ input[type="range"]::-moz-range-track {
     padding: 6px 12px;
     border-radius: 7.5px;
   }
+
   .field {
     display: flex;
     flex-direction: column;
     gap: 2px;
   }
 }
+
 /* pretty-print-json theme mapping */
 .json-key {
   color: var(--primary);
