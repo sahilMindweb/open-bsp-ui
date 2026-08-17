@@ -64,7 +64,7 @@ function PartnerIndex() {
               <div className="flex items-center gap-[8px] text-destructive text-[14px]">
                 <TriangleAlert className="w-[16px] h-[16px]" />
                 {t(
-                  "Este App ID ya tiene una solicitud aprobada. El solution ID ya fue emitido para este App ID.",
+                  "Este App ID ya tiene una solicitud pendiente o aprobada. No se puede volver a enviar.",
                 )}
               </div>
             )}

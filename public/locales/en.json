@@ -126,7 +126,7 @@
   "Editar webhook": "Edit webhook",
   "Ejemplo: Juan, #1234...": "Example: John, #1234...",
   "Envía tu ID de aplicación de Meta para solicitar convertirte en partner. Una vez aprobado, recibirás tu Solution ID.": "Submit your Meta app ID to request becoming a partner. Once approved, you will receive your Solution ID.",
-  "Este App ID ya tiene una solicitud aprobada. El solution ID ya fue emitido para este App ID.": "This App ID already has an approved request. A solution ID has already been issued for this App ID.",
+  "Este App ID ya tiene una solicitud pendiente o aprobada. No se puede volver a enviar.": "This App ID already has a pending or approved request. It cannot be submitted again.",
   "El cuerpo es obligatorio": "The body is required",
   "El cuerpo no puede empezar con una variable": "The body cannot start with a variable",
   "El cuerpo no puede terminar con una variable": "The body cannot end with a variable",

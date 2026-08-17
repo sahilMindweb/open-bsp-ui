@@ -12,8 +12,8 @@ export type PartnerRequest = {
   updated_at: string;
 };
 
-// Check whether a given App ID already has an approved partner request
-// (across all orgs) — used to warn before submitting a duplicate.
+// Check whether a given App ID already has a pending or approved partner
+// request (across all orgs) — used to warn before submitting a duplicate.
 export function useAppIdAlreadyApproved(appId: string) {
   const trimmed = appId.trim();
 
@@ -25,7 +25,7 @@ export function useAppIdAlreadyApproved(appId: string) {
         .from("partner_requests")
         .select("id")
         .eq("app_id", trimmed)
-        .eq("status", "approved")
+        .in("status", ["pending", "approved"])
         .maybeSingle()
         .throwOnError();
       return !!data;
